@@ -41,7 +41,7 @@ app.listen();
 
 ```
 
-[See Example]()
+[See Example](https://github.com/lykmapipo/express-router-extra/blob/master/examples/app.js)
 
 Test mounted path(s)
 ```curl
