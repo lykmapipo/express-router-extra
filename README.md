@@ -11,7 +11,6 @@ express router extensions.
 ## Requirements
 
 - NodeJS v9.3.0+
-- body-parser
 
 ## Install
 ```sh
@@ -28,12 +27,12 @@ const app = express();
 
 //instantiate a router
 const router = new Router({prefix: 'v', version: 1});
-router.get('/users', ...); // GET /v1/users
-router.post('/users', ...); // GET /v1/users
-router.get('/users/:id', ...); // GET /v1/users/:id
-router.put('/users/:id', ...); // PUT /v1/users/:id
-router.patch('/users/:id', ...); // PATCH /v1/users/:id
-router.delete('/users/:id', ...); // DELETE /v1/users/:id
+router.get('/users', ...); // GET /v1.0.0/users
+router.post('/users', ...); // GET /v1.0.0/users
+router.get('/users/:id', ...); // GET /v1.0.0/users/:id
+router.put('/users/:id', ...); // PUT /v1.0.0/users/:id
+router.patch('/users/:id', ...); // PATCH /v1.0.0/users/:id
+router.delete('/users/:id', ...); // DELETE /v1.0.0/users/:id
 
 //mount router into app
 router.mount().into(app);
