@@ -125,7 +125,8 @@ describe('Router', function () {
       router.mount().into(app);
 
       const body = {
-        point: 4
+        point: 4,
+        level: 1
       };
 
       supertest(app)
@@ -143,7 +144,7 @@ describe('Router', function () {
 
     it('should be mounted into the app', function (done) {
 
-      const router = new Router({ version: 2, prefix: 'v-' });
+      const router = new Router({ version: 3, prefix: 'v-' });
 
       router.post('/users', function (request, response) {
         response.status(201).json(request.body);
@@ -152,11 +153,13 @@ describe('Router', function () {
       router.mount().into(app);
 
       const body = {
-        point: 4
+        point: 4,
+        level: 2,
+        mode: 1
       };
 
       supertest(app)
-        .post('/v-2.0.0/users')
+        .post('/v-3.0.0/users')
         .send(body)
         .expect(201)
         .end(function (error, response) {
