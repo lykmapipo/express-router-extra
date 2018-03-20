@@ -28,18 +28,25 @@ const app = express();
 
 //instantiate a router
 const router = new Router({prefix: 'v', version: 1});
-router.get('/users', ...);
-router.post('/users', ...);
-router.get('/users/:id', ...);
-router.put('/users/:id', ...);
-router.patch('/users/:id', ...);
-router.delete('/users/:id', ...);
+router.get('/users', ...); // GET /v1/users
+router.post('/users', ...); // GET /v1/users
+router.get('/users/:id', ...); // GET /v1/users/:id
+router.put('/users/:id', ...); // PUT /v1/users/:id
+router.patch('/users/:id', ...); // PATCH /v1/users/:id
+router.delete('/users/:id', ...); // DELETE /v1/users/:id
 
 //mount router into app
 router.mount().into(app);
 
 app.listen();
 
+```
+
+Test mounted path(s)
+```curl
+GET /v1.0.0/users HTTP/1.1
+Authorization: Bearer <token>
+Accept: application/json
 ```
 
 
