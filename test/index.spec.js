@@ -97,15 +97,38 @@ describe('Router', function () {
       expect(mounted.routers).to.have.length(1);
       expect(app._router).to.exist;
       expect(app._router.stack).to.exist;
-      expect(_.find(app._router.stack, ['handle.uuid', router.uuid]))
-        .to.exist;
-      expect(_.find(app._router.stack, ['handle.uuid', router.uuid]).handle)
-        .to.eql(router);
+      const found =
+        _.find(app._router.stack, ['handle.uuid', router.uuid]);
+      expect(found).to.exist;
+      expect(found.handle).to.eql(router);
+
+    });
+
+    it('should be able to mount router only once into app', function () {
+      //before
+      const app = express();
+      expect(app._router).to.not.exist;
+
+      //initialize & mount
+      const router = new Router();
+      router.get('/samples', function (req, res) { res.json(req.body); });
+      const mounted = mount(router, router).into(app);
+
+      //after
+      expect(mounted.routers).to.exist;
+      expect(mounted.routers).to.have.length(1);
+      expect(app._router).to.exist;
+      expect(app._router.stack).to.exist;
+      const founds =
+        _.filter(app._router.stack, ['handle.uuid', router.uuid]);
+      expect(founds).to.exist;
+      expect(founds).to.have.length(1);
+      expect(_.first(founds).handle).to.eql(router);
 
     });
 
 
-    it('should be able to mount router into app', function () {
+    it('should be able to mount routers into app', function () {
       //before
       const app = express();
       expect(app._router).to.not.exist;
@@ -124,16 +147,35 @@ describe('Router', function () {
       expect(mounted.routers).to.have.length(2);
       expect(app._router).to.exist;
       expect(app._router.stack).to.exist;
-      
-      expect(_.find(app._router.stack, ['handle.uuid', routerA.uuid]))
-        .to.exist;
-      expect(_.find(app._router.stack, ['handle.uuid', routerA.uuid]).handle)
-        .to.eql(routerA);
 
-      expect(_.find(app._router.stack, ['handle.uuid', routerB.uuid]))
-        .to.exist;
-      expect(_.find(app._router.stack, ['handle.uuid', routerB.uuid]).handle)
-        .to.eql(routerB);
+      const foundA =
+        _.find(app._router.stack, ['handle.uuid', routerA.uuid]);
+      expect(foundA).to.exist;
+      expect(foundA.handle).to.eql(routerA);
+
+      const foundB =
+        _.find(app._router.stack, ['handle.uuid', routerB.uuid]);
+      expect(foundB).to.exist;
+      expect(foundB.handle).to.eql(routerB);
+
+    });
+
+
+    it('should be able to mount router from paths into app', function () {
+      //before
+      const app = express();
+      expect(app._router).to.not.exist;
+
+      //initialize & mount
+      const mounted = mount('./test/fixtures').into(app);
+
+      //after
+      expect(mounted.routers).to.exist;
+      expect(mounted.routers).to.have.length(1);
+      expect(app._router).to.exist;
+      expect(app._router.stack).to.exist;
+      const routers = _.filter(app._router.stack, ['name', 'router']);
+      expect(routers).to.have.length(1);
 
     });
 

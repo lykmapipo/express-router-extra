@@ -22,6 +22,7 @@ $ npm install --save @lykmapipo/express-router-extra
 ```javascript
 const express = require('express')
 const Router = require('@lykmapipo/express-router-extra').Router;
+const mount = require('@lykmapipo/express-router-extra').mount;
 
 const app = express();
 
@@ -36,6 +37,9 @@ router.delete('/users/:id', ...); // DELETE /v1.0.0/users/:id
 
 //mount router into app
 router.mount().into(app);
+
+//mount routers from paths relative to `cwd`
+mount('./v1', './v2').into(app);
 
 app.listen(3000);
 
