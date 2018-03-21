@@ -9,7 +9,8 @@
     "extra",
     "extension",
     "api",
-    "version"
+    "version",
+    "mount"
   ],
   "main": "index.js",
   "scripts": {
@@ -30,10 +31,12 @@
     "url": "https://github.com/lykmapipo/express-router-extra/issues"
   },
   "homepage": "https://github.com/lykmapipo/express-router-extra",
-  "contributors": [{
-    "name": "lykmapipo",
-    "github": "https://github.com/lykmapipo"
-  }],
+  "contributors": [
+    {
+      "name": "lykmapipo",
+      "github": "https://github.com/lykmapipo"
+    }
+  ],
   "devDependencies": {
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
@@ -49,7 +52,10 @@
   "dependencies": {
     "express": "^4.16.3",
     "lodash": "^4.17.5",
-    "semver": "^5.5.0"
+    "require-all": "^2.2.0",
+    "semver": "^5.5.0",
+    "traverse": "^0.6.6",
+    "uuid": "^3.2.1"
   },
   "engines": {
     "node": ">=8.6.0",

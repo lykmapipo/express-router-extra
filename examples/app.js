@@ -4,7 +4,7 @@
 const path = require('path');
 const express = require('express')
 // const Router = require('@lykmapipo/express-router-extra');
-const Router = require(path.join(__dirname, '..'));
+const Router = require(path.join(__dirname, '..')).Router;
 const faker = require('faker');
 
 const app = express();

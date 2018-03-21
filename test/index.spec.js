@@ -6,11 +6,14 @@ process.env.NODE_ENV = 'test';
 
 //dependencies
 const path = require('path');
+const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
 const supertest = require('supertest');
 const expect = require('chai').expect;
-const Router = require(path.join(__dirname, '..'));
+const Router = require(path.join(__dirname, '..')).Router;
+const Mount = require(path.join(__dirname, '..')).Mount;
+const mount = require(path.join(__dirname, '..')).mount;
 
 
 describe('Router', function () {
@@ -62,6 +65,78 @@ describe('Router', function () {
         expect(router.prefix).to.be.equal('v-');
         expect(router.name).to.equal('router');
       });
+  });
+
+  describe('Mount', function () {
+
+    it('should be a mount factory', function () {
+      expect(Mount).to.exist;
+      expect(Mount).to.be.a('function');
+      expect(Mount.name).to.be.equal('Mount');
+      expect(Mount.length).to.be.equal(1);
+    });
+
+    it('should export mount point', function () {
+      expect(mount).to.exist;
+      expect(mount).to.be.a('function');
+      expect(mount.name).to.be.equal('mount');
+    });
+
+    it('should be able to mount router into app', function () {
+      //before
+      const app = express();
+      expect(app._router).to.not.exist;
+
+      //initialize & mount
+      const router = new Router();
+      router.get('/samples', function (req, res) { res.json(req.body); });
+      const mounted = mount(router).into(app);
+
+      //after
+      expect(mounted.routers).to.exist;
+      expect(mounted.routers).to.have.length(1);
+      expect(app._router).to.exist;
+      expect(app._router.stack).to.exist;
+      expect(_.find(app._router.stack, ['handle.uuid', router.uuid]))
+        .to.exist;
+      expect(_.find(app._router.stack, ['handle.uuid', router.uuid]).handle)
+        .to.eql(router);
+
+    });
+
+
+    it('should be able to mount router into app', function () {
+      //before
+      const app = express();
+      expect(app._router).to.not.exist;
+
+      //initialize & mount
+      const routerA = new Router();
+      routerA.get('/a', function (req, res) { res.json(req.body); });
+
+      const routerB = new Router();
+      routerB.get('/b', function (req, res) { res.json(req.body); });
+
+      const mounted = mount(routerA, routerB).into(app);
+
+      //after
+      expect(mounted.routers).to.exist;
+      expect(mounted.routers).to.have.length(2);
+      expect(app._router).to.exist;
+      expect(app._router.stack).to.exist;
+      
+      expect(_.find(app._router.stack, ['handle.uuid', routerA.uuid]))
+        .to.exist;
+      expect(_.find(app._router.stack, ['handle.uuid', routerA.uuid]).handle)
+        .to.eql(routerA);
+
+      expect(_.find(app._router.stack, ['handle.uuid', routerB.uuid]))
+        .to.exist;
+      expect(_.find(app._router.stack, ['handle.uuid', routerB.uuid]).handle)
+        .to.eql(routerB);
+
+    });
+
   });
 
   describe('Integration', function () {
