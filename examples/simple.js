@@ -7,6 +7,7 @@ const path = require('path');
 const express = require('express')
 // const Router = require('@lykmapipo/express-router-extra');
 const Router = require(path.join(__dirname, '..')).Router;
+const mount = require(path.join(__dirname, '..')).mount;
 const faker = require('faker');
 
 const app = express();
@@ -52,7 +53,7 @@ router.delete('/users/:id', function (request, response) {
 
 
 //mount router into app
-router.mount().into(app);
+mount(router).into(app);
 
 
 app.listen(3000);
