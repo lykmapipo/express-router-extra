@@ -179,6 +179,29 @@ describe('Router', function () {
       const routers = _.filter(app._router.stack, ['name', 'router']);
       expect(routers).to.have.length(1);
 
+      delete process.env.CWD;
+
+    });
+
+    it('should be able to mount router from paths into app', function () {
+      //before
+      const app = express();
+      expect(app._router).to.not.exist;
+
+      //initialize & mount
+      process.env.APP_PATH = path.resolve(__dirname);
+      const mounted = mount('./fixtures').into(app);
+
+      //after
+      expect(mounted.routers).to.exist;
+      expect(mounted.routers).to.have.length(1);
+      expect(app._router).to.exist;
+      expect(app._router.stack).to.exist;
+      const routers = _.filter(app._router.stack, ['name', 'router']);
+      expect(routers).to.have.length(1);
+
+      delete process.env.APP_PATH;
+
     });
 
   });

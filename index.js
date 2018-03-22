@@ -114,7 +114,8 @@ function Router(optns) {
 function Mount(optns) {
 
   //merge default options
-  this.options = _.merge({}, { cwd: process.env.CWD || '' }, optns);
+  const cwd = process.env.APP_PATH || process.env.CWD || '';
+  this.options = _.merge({}, { cwd: cwd }, optns);
 
   return this;
 }
@@ -140,7 +141,7 @@ Mount.prototype.load = function (optns) {
 
   //default options
   const options = _.merge({}, {
-    cwd: process.env.CWD || '',
+    cwd: process.env.APP_PATH || process.env.CWD || '',
     path: process.cwd(),
     exclude: ['node_modules'],
     // suffix: '_router',
