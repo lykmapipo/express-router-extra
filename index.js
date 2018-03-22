@@ -54,7 +54,8 @@ const ExpressRouter = express.Router;
 function Router(optns) {
 
   //merge default options
-  const options = _.merge({}, { version: 1, prefix: 'v', uuid: uuid() }, optns);
+  const defaults = { version: 1, prefix: 'v', uuid: uuid() };
+  const options = _.merge({}, defaults, optns);
 
   //instantiate and add resource details
   const router = new ExpressRouter(options);

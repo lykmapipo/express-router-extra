@@ -65,6 +65,7 @@ describe('Router', function () {
         expect(router.prefix).to.be.equal('v-');
         expect(router.name).to.equal('router');
       });
+
   });
 
   describe('Mount', function () {
