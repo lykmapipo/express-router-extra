@@ -10,6 +10,7 @@ const Router = require(path.join(__dirname, '..')).Router;
 const mount = require(path.join(__dirname, '..')).mount;
 const faker = require('faker');
 
+process.env.CWD = path.resolve(__dirname);
 const app = express();
 
 //instantiate a router

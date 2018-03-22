@@ -168,7 +168,8 @@ describe('Router', function () {
       expect(app._router).to.not.exist;
 
       //initialize & mount
-      const mounted = mount('./test/fixtures').into(app);
+      process.env.CWD = path.resolve(__dirname);
+      const mounted = mount('./fixtures').into(app);
 
       //after
       expect(mounted.routers).to.exist;

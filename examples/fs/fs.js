@@ -9,6 +9,7 @@ const express = require('express')
 const mount = require(path.join(__dirname, '..', '..')).mount;
 
 //mount routers into app
+process.env.CWD = path.resolve(__dirname);
 const app = express();
 mount('./v1', './v2').into(app); //path  must be relative to `cwd`
 

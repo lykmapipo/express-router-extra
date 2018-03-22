@@ -24,6 +24,7 @@ const express = require('express')
 const Router = require('@lykmapipo/express-router-extra').Router;
 const mount = require('@lykmapipo/express-router-extra').mount;
 
+process.env.CWD = path.resolve(__dirname); //used internally to resolve routers paths
 const app = express();
 
 //instantiate a router

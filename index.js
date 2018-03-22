@@ -114,7 +114,7 @@ function Router(optns) {
 function Mount(optns) {
 
   //merge default options
-  this.options = _.merge({}, { cwd: process.cwd() }, optns);
+  this.options = _.merge({}, { cwd: process.env.CWD || '' }, optns);
 
   return this;
 }
@@ -140,15 +140,17 @@ Mount.prototype.load = function (optns) {
 
   //default options
   const options = _.merge({}, {
-    cwd: process.cwd(),
+    cwd: process.env.CWD || '',
+    path: process.cwd(),
     exclude: ['node_modules'],
     // suffix: '_router',
     recursive: true
   }, optns);
 
+
   //prepare routers load options
   const loadOptions = {
-    dirname: path.resolve(options.cwd),
+    dirname: path.resolve(options.cwd, options.path),
     // filter: new RegExp(`(.+${options.suffix})\\.js$`),
     excludeDirs: new RegExp(`^\\.|${options.exclude.join('|^')}$`),
     recursive: options.recursive,
@@ -207,15 +209,15 @@ Mount.prototype.mount = function mount(...wrouters) {
   let routers = [].concat(...wrouters);
 
   //filter directories
-  const cwds = _.filter(routers, function (router) {
+  const dirs = _.filter(routers, function (router) {
     return !(_.isFunction(router) && router.name === 'router');
   });
 
 
   //load cwd routers
   if (!_.isEmpty(this.options.cwd)) {
-    let additionals = _.map(cwds, function (cwd) {
-      return this.load({ cwd: cwd });
+    let additionals = _.map(dirs, function (dir) {
+      return this.load({ path: dir });
     }.bind(this));
     additionals = _.flatten(additionals);
     routers = [].concat(routers).concat(additionals);
