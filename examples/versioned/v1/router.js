@@ -1,17 +1,15 @@
 'use strict';
 
+
 //dependencies
 const path = require('path');
-const express = require('express')
 // const Router = require('@lykmapipo/express-router-extra');
-const Router = require(path.join(__dirname, '..')).Router;
+const Router = require(path.join(__dirname, '..', '..', '..')).Router;
 const faker = require('faker');
 
-const app = express();
 
 //instantiate a router
 const router = new Router({ prefix: 'v', version: 1 });
-
 
 // GET /v1.0.0/users
 router.get('/users', function (request, response) {
@@ -49,8 +47,5 @@ router.delete('/users/:id', function (request, response) {
 });
 
 
-//mount router into app
-router.mount().into(app);
-
-
-app.listen(3000);
+//exports
+module.exports = exports = router;

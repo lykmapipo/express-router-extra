@@ -14,8 +14,7 @@
   ],
   "main": "index.js",
   "scripts": {
-    "test": "grunt test",
-    "dev": "node examples/app.js"
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",
@@ -31,12 +30,10 @@
     "url": "https://github.com/lykmapipo/express-router-extra/issues"
   },
   "homepage": "https://github.com/lykmapipo/express-router-extra",
-  "contributors": [
-    {
-      "name": "lykmapipo",
-      "github": "https://github.com/lykmapipo"
-    }
-  ],
+  "contributors": [{
+    "name": "lykmapipo",
+    "github": "https://github.com/lykmapipo"
+  }],
   "devDependencies": {
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
