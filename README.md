@@ -21,8 +21,7 @@ $ npm install --save @lykmapipo/express-router-extra
 
 ```javascript
 const express = require('express')
-const Router = require('@lykmapipo/express-router-extra').Router;
-const mount = require('@lykmapipo/express-router-extra').mount;
+const { Router, mount } = require('@lykmapipo/express-router-extra');
 
 process.env.CWD = path.resolve(__dirname); //used internally to resolve routers paths
 const app = express();

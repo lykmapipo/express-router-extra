@@ -32,16 +32,18 @@ describe('Router', function () {
       expect(router).to.exist;
       expect(router.version).to.exist;
       expect(router.version).to.be.equal('1.0.0');
+      expect(router.apiVersion).to.be.equal(1);
       expect(router.prefix).to.be.equal('v');
       expect(router.name).to.equal('router');
 
     });
 
     it('should instantiate router with provided version', function () {
-      const router = new Router({ version: '0.1.0' });
+      const router = new Router({ version: '0.1.0', minor: true });
       expect(router).to.exist;
       expect(router.version).to.exist;
       expect(router.version).to.be.equal('0.1.0');
+      expect(router.apiVersion).to.be.equal('0.1');
       expect(router.prefix).to.be.equal('v');
       expect(router.name).to.equal('router');
     });
@@ -52,16 +54,19 @@ describe('Router', function () {
         expect(router).to.exist;
         expect(router.version).to.exist;
         expect(router.version).to.be.equal('1.0.0');
+        expect(router.apiVersion).to.be.equal(1);
         expect(router.prefix).to.be.equal('v-');
         expect(router.name).to.equal('router');
       });
 
     it('should instantiate router with provided version prefix',
       function () {
-        const router = new Router({ prefix: 'v-', version: '0.1.0' });
+        const router =
+          new Router({ prefix: 'v-', version: '0.1.0', minor: true });
         expect(router).to.exist;
         expect(router.version).to.exist;
         expect(router.version).to.be.equal('0.1.0');
+        expect(router.apiVersion).to.be.equal('0.1');
         expect(router.prefix).to.be.equal('v-');
         expect(router.name).to.equal('router');
       });
@@ -244,7 +249,7 @@ describe('Router', function () {
       };
 
       supertest(app)
-        .post('/v1.0.0/users')
+        .post('/v1/users')
         .send(body)
         .expect(201)
         .end(function (error, response) {
@@ -272,7 +277,7 @@ describe('Router', function () {
       };
 
       supertest(app)
-        .post('/v2.0.0/users')
+        .post('/v2/users')
         .send(body)
         .expect(201)
         .end(function (error, response) {
@@ -301,7 +306,7 @@ describe('Router', function () {
       };
 
       supertest(app)
-        .post('/v-3.0.0/users')
+        .post('/v-3/users')
         .send(body)
         .expect(201)
         .end(function (error, response) {

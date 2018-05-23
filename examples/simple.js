@@ -17,37 +17,37 @@ const app = express();
 const router = new Router({ prefix: 'v', version: 1 });
 
 
-// GET /v1.0.0/users
+// GET /v1/users
 router.get('/users', function (request, response) {
   response.status(200).json({ data: [faker.helpers.userCard()] });
 });
 
 
-// GET /v1.0.0/users
+// GET /v1/users
 router.post('/users', function (request, response) {
   response.status(201).json(faker.helpers.userCard());
 });
 
 
-// GET /v1.0.0/users/:id
+// GET /v1/users/:id
 router.get('/users/:id', function (request, response) {
   response.status(200).json(faker.helpers.userCard());
 });
 
 
-// PUT /v1.0.0/users/:id 
+// PUT /v1/users/:id 
 router.put('/users/:id', function (request, response) {
   response.status(200).json(faker.helpers.userCard());
 });
 
 
-// PATCH /v1.0.0/users/:id 
+// PATCH /v1/users/:id 
 router.patch('/users/:id', function (request, response) {
   response.status(200).json(faker.helpers.userCard());
 });
 
 
-// DELETE /v1.0.0/users/:id 
+// DELETE /v1/users/:id 
 router.delete('/users/:id', function (request, response) {
   response.status(200).json(faker.helpers.userCard());
 });

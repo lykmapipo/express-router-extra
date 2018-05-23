@@ -21,6 +21,14 @@ const load = require('require-all');
 const traverse = require('traverse');
 const ExpressRouter = express.Router;
 
+//constants
+const defaults = {
+  version: 1,
+  prefix: 'v',
+  major: true,
+  minor: false,
+  patch: false
+};
 
 /**
  * @name Router
@@ -54,14 +62,30 @@ const ExpressRouter = express.Router;
 function Router(optns) {
 
   //merge default options
-  const defaults = { version: 1, prefix: 'v', uuid: uuid() };
-  const options = _.merge({}, defaults, optns);
+  const options = _.merge({}, { uuid: uuid() }, defaults, optns);
 
   //instantiate and add resource details
   const router = new ExpressRouter(options);
-  router.version = semver.coerce(String(options.version || 1)).version;
+  const parsedVersion = semver.coerce(String(options.version || 1));
+
+  //update router metadata
+  router.version = parsedVersion.version;
   router.prefix = options.prefix || 'v';
   router.uuid = options.uuid || uuid();
+
+  //prepare router exposed api version
+  router.apiVersion = router.version;
+
+  //no patch
+  if (!options.patch) {
+    router.apiVersion =
+      ([parsedVersion.major, parsedVersion.minor].join('.'));
+  }
+
+  //no minor
+  if (!options.minor) {
+    router.apiVersion = parsedVersion.major;
+  }
 
   /**
    * @name mountInto
@@ -256,7 +280,7 @@ Mount.prototype.into = function into(app) {
 
       //register versioned routers
       if (router.version && semver.valid(router.version)) {
-        const prefix = `/${router.prefix}${router.version}`;
+        const prefix = `/${router.prefix}${router.apiVersion}`;
         app.use(prefix, router);
       }
 
