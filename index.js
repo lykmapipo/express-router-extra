@@ -91,7 +91,7 @@ function Router(optns) {
    * @name mountInto
    * @type {Function}
    * @description mount this router into provided express application
-   * @param  {express} app valid instance of express application
+   * @param {express} app valid instance of express application
    * @author lally elias <lallyelias87@mail.com>
    * @since  0.1.0
    * @version 0.1.0
@@ -215,7 +215,7 @@ Mount.prototype.load = function (optns) {
  * @type {Function}
  * @description ensure unique routers from provided list and loaded routers
  *              from cwd
- * @param  {...Router} [wrouters] valid express router collections
+ * @param {...Router} [wrouters] valid express router collections
  * @return {Object} valid instance of mount for further chaining
  * @author lally elias <lallyelias87@mail.com>
  * @since  0.1.0
@@ -264,7 +264,7 @@ Mount.prototype.mount = function mount(...wrouters) {
  * @name into
  * @type {Function}
  * @description load(use) current mount routers into provided express app 
- * @param  {Object} app valid express application or router
+ * @param {Object} app valid express application or router
  * @author lally elias <lallyelias87@mail.com>
  * @since  0.1.0
  * @version 0.1.0
