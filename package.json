@@ -1,6 +1,6 @@
 {
   "name": "@lykmapipo/express-router-extra",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "handy helpers for express request",
   "keywords": [
     "lykmapipo",
@@ -37,9 +37,9 @@
     }
   ],
   "devDependencies": {
-    "body-parser": "^1.18.3",
+    "body-parser": ">=1.18.3",
     "chai": "^4.2.0",
-    "express": "^4.16.4",
+    "express": ">=4.16.4",
     "faker": "^4.1.0",
     "grunt": "^1.0.3",
     "grunt-contrib-jshint": "^2.0.0",
@@ -47,18 +47,17 @@
     "grunt-mocha-test": "^0.13.3",
     "jshint-stylish": "^2.2.1",
     "mocha": "^5.2.0",
-    "lodash": "^4.17.11",
     "supertest": "^3.3.0"
   },
   "peerDependencies": {
-    "express": "^4.16.4",
-    "lodash": "^4.17.11"
+    "express": ">=4.16.4"
   },
   "dependencies": {
-    "require-all": "^3.0.0",
-    "semver": "^5.6.0",
-    "traverse": "^0.6.6",
-    "uuid": "^3.3.2"
+    "lodash": ">=4.17.11",
+    "require-all": ">=3.0.0",
+    "semver": ">=5.6.0",
+    "traverse": ">=0.6.6",
+    "uuid": ">=3.3.2"
   },
   "engines": {
     "node": ">=8.6.0",
