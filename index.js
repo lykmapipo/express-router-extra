@@ -14,12 +14,12 @@
 //dependencies
 const path = require('path');
 const _ = require('lodash');
-const semver = require('semver');
 const uuid = require('uuid/v1');
 const express = require('express');
 const load = require('require-all');
 const traverse = require('traverse');
 const ExpressRouter = express.Router;
+const { apiVersion } = require('@lykmapipo/env');
 
 //constants
 const defaults = {
@@ -66,26 +66,10 @@ function Router(optns) {
 
   //instantiate and add resource details
   const router = new ExpressRouter(options);
-  const parsedVersion = semver.coerce(String(options.version || 1));
 
   //update router metadata
-  router.version = parsedVersion.version;
-  router.prefix = options.prefix || 'v';
+  router.version = apiVersion(options);
   router.uuid = options.uuid || uuid();
-
-  //prepare router exposed api version
-  router.apiVersion = router.version;
-
-  //no patch
-  if (!options.patch) {
-    router.apiVersion =
-      ([parsedVersion.major, parsedVersion.minor].join('.'));
-  }
-
-  //no minor
-  if (!options.minor) {
-    router.apiVersion = parsedVersion.major;
-  }
 
   /**
    * @name mountInto
@@ -279,8 +263,8 @@ Mount.prototype.into = function into(app) {
     _.forEach(this.routers, function (router) {
 
       //register versioned routers
-      if (router.version && semver.valid(router.version)) {
-        const prefix = `/${router.prefix}${router.apiVersion}`;
+      if (router.version) {
+        const prefix = `/${router.version}`;
         app.use(prefix, router);
       }
 

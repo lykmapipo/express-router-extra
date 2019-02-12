@@ -31,9 +31,7 @@ describe('Router', function () {
       const router = new Router();
       expect(router).to.exist;
       expect(router.version).to.exist;
-      expect(router.version).to.be.equal('1.0.0');
-      expect(router.apiVersion).to.be.equal(1);
-      expect(router.prefix).to.be.equal('v');
+      expect(router.version).to.be.equal('v1');
       expect(router.name).to.equal('router');
 
     });
@@ -42,9 +40,7 @@ describe('Router', function () {
       const router = new Router({ version: '0.1.0', minor: true });
       expect(router).to.exist;
       expect(router.version).to.exist;
-      expect(router.version).to.be.equal('0.1.0');
-      expect(router.apiVersion).to.be.equal('0.1');
-      expect(router.prefix).to.be.equal('v');
+      expect(router.version).to.be.equal('v0.1');
       expect(router.name).to.equal('router');
     });
 
@@ -53,9 +49,7 @@ describe('Router', function () {
         const router = new Router({ prefix: 'v-' });
         expect(router).to.exist;
         expect(router.version).to.exist;
-        expect(router.version).to.be.equal('1.0.0');
-        expect(router.apiVersion).to.be.equal(1);
-        expect(router.prefix).to.be.equal('v-');
+        expect(router.version).to.be.equal('v-1');
         expect(router.name).to.equal('router');
       });
 
@@ -65,9 +59,7 @@ describe('Router', function () {
           new Router({ prefix: 'v-', version: '0.1.0', minor: true });
         expect(router).to.exist;
         expect(router.version).to.exist;
-        expect(router.version).to.be.equal('0.1.0');
-        expect(router.apiVersion).to.be.equal('0.1');
-        expect(router.prefix).to.be.equal('v-');
+        expect(router.version).to.be.equal('v-0.1');
         expect(router.name).to.equal('router');
       });
 
@@ -241,7 +233,6 @@ describe('Router', function () {
       router.post('/users', function (request, response) {
         response.status(201).json(request.body);
       });
-
       router.mount().into(app);
 
       const body = {
