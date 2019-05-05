@@ -12,12 +12,9 @@
 
 
 //dependencies
-const path = require('path');
 const _ = require('lodash');
 const uuid = require('uuid/v1');
 const express = require('express');
-const load = require('require-all');
-const traverse = require('traverse');
 const ExpressRouter = express.Router;
 const { apiVersion } = require('@lykmapipo/env');
 
@@ -130,71 +127,6 @@ function Mount(optns) {
 
 
 /**
- * @name load
- * @description scan for express routers from provided cwd
- * @param {Object} [optns] valid routers loading options
- * @param {String} [optns.cwd] working director to load routers from
- * @return {Object} object representation of loaded routers
- * @see  {@link https://github.com/felixge/node-require-all}
- * @author lally elias <lallyelias87@mail.com>
- * @since  0.1.0
- * @version 0.1.0
- * @private
- * @example
- *
- * const routers = load({cwd: './v1'});
- * 
- */
-Mount.prototype.load = function (optns) {
-
-  //default options
-  const options = _.merge({}, {
-    cwd: process.env.APP_PATH || process.env.CWD || '',
-    path: process.cwd(),
-    exclude: ['node_modules'],
-    // suffix: '_router',
-    recursive: true
-  }, optns);
-
-
-  //prepare routers load options
-  const loadOptions = {
-    dirname: path.resolve(options.cwd, options.path),
-    // filter: new RegExp(`(.+${options.suffix})\\.js$`),
-    excludeDirs: new RegExp(`^\\.|${options.exclude.join('|^')}$`),
-    recursive: options.recursive,
-    resolve: function (router) {
-      const isRouter = (_.isFunction(router) && router.name === 'router');
-      if (isRouter) {
-        return router;
-      } else {
-        return undefined;
-      }
-    }
-  };
-
-  //load routers
-  let routers = load(loadOptions);
-
-  //ensure only router instance are loaded
-  routers = traverse(routers).reduce(function (accumulator, leaf) {
-    const isRouter =
-      (leaf && _.isFunction(leaf) && leaf.name === 'router');
-    if (isRouter) {
-      accumulator.push(leaf);
-    }
-    return accumulator;
-  }, []);
-
-  //clean loaded routers(unique & compact)
-  routers = _.compact(routers);
-  routers = _.uniqBy(routers, 'uuid');
-
-  return routers;
-};
-
-
-/**
  * @name mount
  * @type {Function}
  * @description ensure unique routers from provided list and loaded routers
@@ -216,21 +148,6 @@ Mount.prototype.mount = function mount(...wrouters) {
 
   //collect routers passed routers
   let routers = [].concat(...wrouters);
-
-  //filter directories
-  const dirs = _.filter(routers, function (router) {
-    return !(_.isFunction(router) && router.name === 'router');
-  });
-
-
-  //load cwd routers
-  if (!_.isEmpty(this.options.cwd)) {
-    let additionals = _.map(dirs, function (dir) {
-      return this.load({ path: dir });
-    }.bind(this));
-    additionals = _.flatten(additionals);
-    routers = [].concat(routers).concat(additionals);
-  }
 
   //retain only routers
   routers = _.filter(routers, function (router) {
