@@ -1,3 +1,9 @@
+#### 0.3.3 (2019-05-05)
+
+##### Refactors
+
+*  drop loading routers from paths ([24ae3fe0](https://github.com/lykmapipo/express-router-extra/commit/24ae3fe0cf476741da0203e14ce3d732526dc829))
+
 #### 0.3.2 (2019-05-01)
 
 ##### Chores
