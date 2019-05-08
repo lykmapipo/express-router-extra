@@ -1,3 +1,18 @@
+#### 0.4.0 (2019-05-08)
+
+##### Chores
+
+*  update sample & examples ([57b5ebc2](https://github.com/lykmapipo/express-router-extra/commit/57b5ebc2bf01417ff9b8249816d781dc8570a2ce))
+* **deps:**  force latest version & audit fix ([ff0e5427](https://github.com/lykmapipo/express-router-extra/commit/ff0e5427beac02ccbdc14104157eee4932148576))
+
+##### Refactors
+
+*  extract mount logic into helper function ([bcb782ea](https://github.com/lykmapipo/express-router-extra/commit/bcb782ea2506fff57c4879bf0e8033ab1835c95a))
+
+##### Tests
+
+*  refactor to use arrow functions ([eb2c88bf](https://github.com/lykmapipo/express-router-extra/commit/eb2c88bf1e452300b3d4add796831a843d0a352d))
+
 #### 0.3.3 (2019-05-05)
 
 ##### Refactors
