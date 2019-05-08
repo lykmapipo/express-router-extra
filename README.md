@@ -21,12 +21,9 @@ $ npm install --save @lykmapipo/express-router-extra
 
 ```javascript
 const express = require('express')
-const { Router, mount } = require('@lykmapipo/express-router-extra');
+const { Router, mountInto } = require('@lykmapipo/express-router-extra');
 
-process.env.CWD = path.resolve(__dirname); //used internally to resolve routers paths
-const app = express();
-
-//instantiate a router
+// instantiate a router
 const router = new Router({prefix: 'v', version: 1});
 router.get('/users', ...); // GET /v1.0.0/users
 router.post('/users', ...); // GET /v1.0.0/users
@@ -35,19 +32,14 @@ router.put('/users/:id', ...); // PUT /v1.0.0/users/:id
 router.patch('/users/:id', ...); // PATCH /v1.0.0/users/:id
 router.delete('/users/:id', ...); // DELETE /v1.0.0/users/:id
 
-//mount router into app
-router.mount().into(app);
-
-//mount routers from paths relative to `cwd`
-mount('./v1', './v2').into(app);
+// mount router into app
+router.mountInto(app);
 
 app.listen(3000);
 
 ```
 
 - [See Example](https://github.com/lykmapipo/express-router-extra/blob/master/examples/simple.js)
-
-- [See Example](https://github.com/lykmapipo/express-router-extra/blob/master/examples/fs/fs.js)
 
 Test mounted path(s)
 ```curl
