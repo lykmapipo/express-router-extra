@@ -14,15 +14,15 @@ const expect = require('chai').expect;
 const { Router, mountInto } = require(path.join(__dirname, '..'));
 
 
-describe('Unit', function () {
-  it('should export router factory', function () {
+describe('Unit', () => {
+  it('should export router factory', () => {
     expect(Router).to.exist;
     expect(Router).to.be.a('function');
     expect(Router.name).to.be.equal('Router');
     expect(Router.length).to.be.equal(1);
   });
 
-  it('should instantiate router with default version', function () {
+  it('should instantiate router with default version', () => {
     const router = new Router();
     expect(router).to.exist;
     expect(router.version).to.exist;
@@ -30,7 +30,7 @@ describe('Unit', function () {
     expect(router.name).to.equal('router');
   });
 
-  it('should instantiate router with provided version', function () {
+  it('should instantiate router with provided version', () => {
     const router = new Router({ version: '0.1.0', minor: true });
     expect(router).to.exist;
     expect(router.version).to.exist;
@@ -39,7 +39,7 @@ describe('Unit', function () {
   });
 
   it('should instantiate router with provided version prefix',
-    function () {
+    () => {
       const router = new Router({ prefix: 'v-' });
       expect(router).to.exist;
       expect(router.version).to.exist;
@@ -48,7 +48,7 @@ describe('Unit', function () {
     });
 
   it('should instantiate router with provided version prefix',
-    function () {
+    () => {
       const router =
         new Router({ prefix: 'v-', version: '0.1.0', minor: true });
       expect(router).to.exist;
@@ -58,21 +58,21 @@ describe('Unit', function () {
     });
 });
 
-describe('Mount', function () {
-  it('should export mount point', function () {
+describe('Mount', () => {
+  it('should export mount point', () => {
     expect(mountInto).to.exist;
     expect(mountInto).to.be.a('function');
     expect(mountInto.name).to.be.equal('mountInto');
   });
 
-  it('should be able to mount router into app', function () {
+  it('should be able to mount router into app', () => {
     //before
     const app = express();
     expect(app._router).to.not.exist;
 
     //initialize & mount
     const router = new Router();
-    router.get('/samples', function (req, res) { res.json(req.body); });
+    router.get('/samples', (req, res) => { res.json(req.body); });
     mountInto(app, router);
 
     //after
@@ -84,14 +84,14 @@ describe('Mount', function () {
     expect(found.handle).to.eql(router);
   });
 
-  it('should be able to mount router only once into app', function () {
+  it('should be able to mount router only once into app', () => {
     //before
     const app = express();
     expect(app._router).to.not.exist;
 
     //initialize & mount
     const router = new Router();
-    router.get('/samples', function (req, res) { res.json(req.body); });
+    router.get('/samples', (req, res) => { res.json(req.body); });
     mountInto(app, router, router);
 
     //after
@@ -104,17 +104,17 @@ describe('Mount', function () {
     expect(_.first(founds).handle).to.eql(router);
   });
 
-  it('should be able to mount routers into app', function () {
+  it('should be able to mount routers into app', () => {
     //before
     const app = express();
     expect(app._router).to.not.exist;
 
     //initialize & mount
     const routerA = new Router();
-    routerA.get('/a', function (req, res) { res.json(req.body); });
+    routerA.get('/a', (req, res) => { res.json(req.body); });
 
     const routerB = new Router();
-    routerB.get('/b', function (req, res) { res.json(req.body); });
+    routerB.get('/b', (req, res) => { res.json(req.body); });
 
     mountInto(app, routerA, routerB);
 
@@ -134,15 +134,15 @@ describe('Mount', function () {
   });
 });
 
-describe('Integration', function () {
+describe('Integration', () => {
   let app;
-  before(function () {
+  before(() => {
     app = express();
     app.use(bodyParser.urlencoded({ extended: true }));
     app.use(bodyParser.json());
   });
 
-  it('should be mountable', function () {
+  it('should be mountable', () => {
     const router = new Router();
 
     expect(router.mount).to.exist;
@@ -155,23 +155,20 @@ describe('Integration', function () {
     expect(router.mountInto).to.be.a('function');
   });
 
-  it('should be mounted into the app', function (done) {
+  it('should be mounted into the app', done => {
     const router = new Router();
-
     router.post('/users', function (request, response) {
       response.status(201).json(request.body);
     });
     router.mountInto(app);
 
-    const body = {
-      point: 4
-    };
+    const body = { point: 4 };
 
     supertest(app)
       .post('/v1/users')
       .send(body)
       .expect(201)
-      .end(function (error, response) {
+      .end((error, response) => {
         expect(error).to.not.exist;
         expect(response.body).to.exist;
         expect(response.body).to.be.eql(body);
@@ -179,25 +176,20 @@ describe('Integration', function () {
       });
   });
 
-  it('should be mounted into the app', function (done) {
+  it('should be mounted into the app', done => {
     const router = new Router({ version: 2 });
-
     router.post('/users', function (request, response) {
       response.status(201).json(request.body);
     });
-
     router.mountInto(app);
 
-    const body = {
-      point: 4,
-      level: 1
-    };
+    const body = { point: 4, level: 1 };
 
     supertest(app)
       .post('/v2/users')
       .send(body)
       .expect(201)
-      .end(function (error, response) {
+      .end((error, response) => {
         expect(error).to.not.exist;
         expect(response.body).to.exist;
         expect(response.body).to.be.eql(body);
@@ -205,26 +197,20 @@ describe('Integration', function () {
       });
   });
 
-  it('should be mounted into the app', function (done) {
+  it('should be mounted into the app', done => {
     const router = new Router({ version: 3, prefix: 'v-' });
-
     router.post('/users', function (request, response) {
       response.status(201).json(request.body);
     });
-
     router.mountInto(app);
 
-    const body = {
-      point: 4,
-      level: 2,
-      mode: 1
-    };
+    const body = { point: 4, level: 2, mode: 1 };
 
     supertest(app)
       .post('/v-3/users')
       .send(body)
       .expect(201)
-      .end(function (error, response) {
+      .end((error, response) => {
         expect(error).to.not.exist;
         expect(response.body).to.exist;
         expect(response.body).to.be.eql(body);
