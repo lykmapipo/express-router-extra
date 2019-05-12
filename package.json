@@ -53,7 +53,7 @@
     "express": ">=4.16.4"
   },
   "dependencies": {
-    "@lykmapipo/env": ">=0.7.5",
+    "@lykmapipo/env": ">=0.7.6",
     "lodash": ">=4.17.11",
     "uuid": ">=3.3.2"
   },
