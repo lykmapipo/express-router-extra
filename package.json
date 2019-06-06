@@ -39,7 +39,6 @@
   "devDependencies": {
     "body-parser": ">=1.19.0",
     "chai": "^4.2.0",
-    "express": ">=4.17.0",
     "faker": "^4.1.0",
     "grunt": "^1.0.4",
     "grunt-contrib-jshint": "^2.1.0",
@@ -49,11 +48,9 @@
     "mocha": "^6.1.4",
     "supertest": "^4.0.2"
   },
-  "peerDependencies": {
-    "express": ">=4.17.0"
-  },
   "dependencies": {
-    "@lykmapipo/env": ">=0.7.7",
+    "@lykmapipo/env": ">=0.7.9",
+    "express": ">=4.17.1",
     "lodash": ">=4.17.11",
     "uuid": ">=3.3.2"
   },
