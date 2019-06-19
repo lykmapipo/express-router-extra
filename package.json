@@ -50,7 +50,7 @@
     "supertest": "^4.0.2"
   },
   "dependencies": {
-    "@lykmapipo/env": ">=0.8.1",
+    "@lykmapipo/env": ">=0.9.1",
     "express": ">=4.17.1",
     "lodash": ">=4.17.11",
     "uuid": ">=3.3.2"
