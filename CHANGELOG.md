@@ -1,3 +1,11 @@
+#### 0.4.8 (2019-09-16)
+
+##### Chores
+
+* **deps:**
+  *  force latest version & audit fix ([0121ade7](https://github.com/lykmapipo/express-router-extra/commit/0121ade734068548971163e42bcf74755dac8e91))
+  *  force latest versions & audit fix ([274da569](https://github.com/lykmapipo/express-router-extra/commit/274da569ba29c80d0004e71e375ed2a8a16c490d))
+
 #### 0.4.7 (2019-08-15)
 
 ##### Chores
