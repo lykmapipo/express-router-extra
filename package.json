@@ -47,12 +47,12 @@
     "handlebars": "^4.7.2",
     "jshint-stylish": "^2.2.1",
     "lodash.template": "^4.5.0",
-    "mocha": "^7.0.0",
+    "mocha": "^7.0.1",
     "shelljs": "^0.8.3",
     "supertest": "^4.0.2"
   },
   "dependencies": {
-    "@lykmapipo/env": ">=0.16.5",
+    "@lykmapipo/env": ">=0.16.6",
     "express": ">=4.17.1",
     "lodash": ">=4.17.15",
     "uuid": ">=3.4.0"
