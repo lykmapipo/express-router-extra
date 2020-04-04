@@ -5,13 +5,12 @@ process.env.NODE_ENV = 'test';
 
 
 //dependencies
-const path = require('path');
 const _ = require('lodash');
 const express = require('express');
 const bodyParser = require('body-parser');
 const supertest = require('supertest');
-const expect = require('chai').expect;
-const { Router, mountInto } = require(path.join(__dirname, '..'));
+const { expect } = require('chai');
+const { Router, mountInto } = require('..');
 
 
 describe('Unit', () => {
