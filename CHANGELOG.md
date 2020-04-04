@@ -1,3 +1,15 @@
+#### 0.5.0 (2020-04-04)
+
+##### Chores
+
+* **deps:**
+  *  prune & dedupe ([ef7914c2](https://github.com/lykmapipo/express-router-extra/commit/ef7914c2260e69b7ad165422804cc7fdac5255d0))
+  *  force latest version & audit fix ([f173f59c](https://github.com/lykmapipo/express-router-extra/commit/f173f59c205960f7e5174b314e9c295a3575cfa0))
+
+##### Refactors
+
+*  use uuid latest version ([3a0cadcd](https://github.com/lykmapipo/express-router-extra/commit/3a0cadcdd439986ea77138ccb4b64f0dc44be994))
+
 #### 0.4.22 (2020-03-30)
 
 #### 0.4.21 (2020-03-06)
