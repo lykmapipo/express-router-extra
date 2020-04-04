@@ -13,7 +13,7 @@
 
 //dependencies
 const _ = require('lodash');
-const uuid = require('uuid/v1');
+const { v1: uuid } = require('uuid');
 const express = require('express');
 const { apiVersion } = require('@lykmapipo/env');
 
