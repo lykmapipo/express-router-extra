@@ -1,3 +1,9 @@
+#### 0.5.1 (2020-04-18)
+
+##### Chores
+
+* **deps:**  force latest version & audit fix ([5426acc6](https://github.com/lykmapipo/express-router-extra/commit/5426acc678f6d732025cb776b5adb8f237d61b1b))
+
 #### 0.5.0 (2020-04-04)
 
 ##### Chores
