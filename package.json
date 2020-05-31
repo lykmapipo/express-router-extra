@@ -47,15 +47,15 @@
     "handlebars": "^4.7.6",
     "jshint-stylish": "^2.2.1",
     "lodash.template": "^4.5.0",
-    "mocha": "^7.1.2",
+    "mocha": "^7.2.0",
     "shelljs": "^0.8.4",
     "supertest": "^4.0.2"
   },
   "dependencies": {
-    "@lykmapipo/env": ">=0.17.6",
+    "@lykmapipo/env": ">=0.17.7",
     "express": ">=4.17.1",
     "lodash": ">=4.17.15",
-    "uuid": ">=8.0.0"
+    "uuid": ">=8.1.0"
   },
   "engines": {
     "node": ">=8.6.0",
