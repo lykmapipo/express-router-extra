@@ -40,7 +40,7 @@
     "body-parser": ">=1.19.0",
     "chai": "^4.2.0",
     "faker": "^4.1.0",
-    "grunt": "^1.1.0",
+    "grunt": "^1.2.1",
     "grunt-contrib-jshint": "^2.1.0",
     "grunt-contrib-watch": "^1.1.0",
     "grunt-mocha-test": "^0.13.3",
@@ -52,9 +52,9 @@
     "supertest": "^4.0.2"
   },
   "dependencies": {
-    "@lykmapipo/env": ">=0.17.11",
+    "@lykmapipo/env": ">=0.17.13",
     "express": ">=4.17.1",
-    "lodash": ">=4.17.15",
+    "lodash": ">=4.17.19",
     "uuid": ">=8.2.0"
   },
   "engines": {
