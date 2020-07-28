@@ -1,6 +1,6 @@
 {
   "name": "@lykmapipo/express-router-extra",
-  "version": "0.5.10",
+  "version": "0.5.11",
   "description": "handy helpers for express request",
   "keywords": [
     "lykmapipo",
