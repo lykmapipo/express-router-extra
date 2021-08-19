@@ -1,7 +1,7 @@
 {
   "name": "@lykmapipo/express-router-extra",
   "version": "0.5.16",
-  "description": "Handy helpers for express router",
+  "description": "Handy express router extensions",
   "main": "lib/index.js",
   "module": "es/index.js",
   "scripts": {

@@ -1,7 +1,7 @@
 import path from 'path';
 import express from 'express';
 import faker from 'faker';
-import { Router, mountInto } from '../src';
+import { Router } from '../src';
 
 process.env.CWD = path.resolve(__dirname);
 const app = express();
@@ -40,7 +40,7 @@ router.delete('/users/:id', (request, response) => {
 });
 
 // mount router into app
-mountInto(app, router);
+router.mountInto(app);
 
 // start app
 app.listen(3000);

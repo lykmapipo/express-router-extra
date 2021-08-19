@@ -1,11 +1,16 @@
 # express-router-extra
 
-[![Build Status](https://travis-ci.org/lykmapipo/express-router-extra.svg?branch=master)](https://travis-ci.org/lykmapipo/express-router-extra)
-[![Dependency Status](https://img.shields.io/david/lykmapipo/express-router-extra.svg?style=flat)](https://david-dm.org/lykmapipo/express-router-extra)
-[![npm version](https://badge.fury.io/js/%40lykmapipo%2Fexpress-router-extra.svg)](https://badge.fury.io/js/@lykmapipo/express-router-extra)
+[![Build Status](https://travis-ci.com/lykmapipo/express-router-extra.svg?branch=master)](https://travis-ci.com/lykmapipo/express-router-extra)
+[![Dependencies Status](https://david-dm.org/lykmapipo/express-router-extra.svg)](https://david-dm.org/lykmapipo/express-router-extra)
+[![Coverage Status](https://coveralls.io/repos/github/lykmapipo/express-router-extra/badge.svg?branch=master)](https://coveralls.io/github/lykmapipo/express-router-extra?branch=master)
+[![GitHub License](https://img.shields.io/github/license/lykmapipo/express-router-extra)](https://github.com/lykmapipo/express-router-extra/blob/master/LICENSE)
 
+[![Commitizen Friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
+[![Code Style](https://badgen.net/badge/code%20style/airbnb/ff5a5f?icon=airbnb)](https://github.com/airbnb/javascript)
+[![npm version](https://img.shields.io/npm/v/@lykmapipo/express-router-extra)](https://www.npmjs.com/package/@lykmapipo/express-router-extra)
 
-express router extensions.
+Handy express router extensions.
 
 
 ## Requirements
@@ -21,7 +26,7 @@ $ npm install --save @lykmapipo/express-router-extra
 
 ```javascript
 import express from 'express';
-import { Router, mountInto } from '@lykmapipo/express-router-extra';
+import { Router } from '@lykmapipo/express-router-extra';
 
 // instantiate a router
 const router = new Router({prefix: 'v', version: 1});
@@ -33,7 +38,7 @@ router.patch('/users/:id', ...); // PATCH /v1.0.0/users/:id
 router.delete('/users/:id', ...); // DELETE /v1.0.0/users/:id
 
 // mount router into app
-mountInto(app);
+router.mountInto(app);
 
 app.listen(3000);
 
