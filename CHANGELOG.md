@@ -1,3 +1,14 @@
+#### 0.6.0 (2021-08-19)
+
+##### Documentation Changes
+
+*  add community files ([52b229ed](https://github.com/lykmapipo/express-router-extra/commit/52b229ed5c3800acb5e2242c126056b2db564999))
+* **readme:**  update usage and status badge ([bb7ccd99](https://github.com/lykmapipo/express-router-extra/commit/bb7ccd99c1e0eaa57bf7848978847653bb0ff801))
+
+##### Refactors
+
+*  migrate to es6 ([2cc2ddf9](https://github.com/lykmapipo/express-router-extra/commit/2cc2ddf9d1e3279dfcb3dc2547155cdfc2d35c3e))
+
 #### 0.5.16 (2021-02-16)
 
 ##### Chores

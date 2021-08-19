@@ -3,6 +3,7 @@ import express from 'express';
 import faker from 'faker';
 import { Router } from '../src';
 
+const PORT = 3000;
 process.env.CWD = path.resolve(__dirname);
 const app = express();
 
@@ -42,5 +43,11 @@ router.delete('/users/:id', (request, response) => {
 // mount router into app
 router.mountInto(app);
 
-// start app
-app.listen(3000);
+// run express app
+app.listen(PORT, (error) => {
+  if (error) {
+    throw error;
+  } else {
+    console.log(`visit http://0.0.0.0:${PORT}/v1/users`);
+  }
+});
