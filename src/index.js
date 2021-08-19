@@ -1,38 +1,24 @@
-'use strict';
+import _ from 'lodash';
+import { v1 as uuid } from 'uuid';
+import express from 'express';
+import { apiVersion } from '@lykmapipo/env';
 
-
-/**
- * @module router-extra
- * @description express router extensions
- * @author lally elias <lallyelias87@mail.com>
- * @since  0.1.0
- * @version 0.1.0
- * @public
- */
-
-
-//dependencies
-const _ = require('lodash');
-const { v1: uuid } = require('uuid');
-const express = require('express');
-const { apiVersion } = require('@lykmapipo/env');
-
-//constants
+// constants
 const defaults = {
   version: 1,
   prefix: 'v',
   major: true,
   minor: false,
-  patch: false
+  patch: false,
 };
 
 /**
  * @name Router
  * @type {Function}
  * @description factory to create express router with version
- * @param {Object} [optns] valid express router options plus its version
- * @param {String|Number} [optns.version] valid router version. default to 1
- * @return {Object|Router} valid express router instance
+ * @param {object} [optns] valid express router options plus its version
+ * @param {string | number} [optns.version] valid router version. default to 1
+ * @returns {object | Router} valid express router instance
  * @author lally elias <lallyelias87@mail.com>
  * @since  0.1.0
  * @version 0.1.0
@@ -55,8 +41,7 @@ const defaults = {
  *
  * app.listen(3000);
  */
-function Router(optns) {
-
+export const Router = function Router(optns) {
   // merge default options
   const options = _.merge({}, { uuid: uuid() }, defaults, optns);
 
@@ -83,18 +68,19 @@ function Router(optns) {
     }
     return router;
   }
-  router.into = router.mount = router.mountInto = mount;
+  router.into = mount;
+  router.mount = mount;
+  router.mountInto = mount;
 
   // return router
   return router;
-}
-
+};
 
 /**
  * @name mountInto
  * @type {Function}
- * @description mount provided routers into provided express app 
- * @param {Object} app valid express application or router
+ * @description mount provided routers into provided express app
+ * @param {object} app valid express application or router
  * @param {...Router} wrouters valid express router instances
  * @author lally elias <lallyelias87@mail.com>
  * @since  0.1.0
@@ -103,25 +89,22 @@ function Router(optns) {
  * @example
  *
  * mountInto(app, routerA, routerB);
- * 
  */
-const mountInto = (app, ...wrouters) => {
+export const mountInto = (app, ...wrouters) => {
   // collect routers passed routers
   let routers = [].concat(...wrouters);
 
   // retain only routers unique valid routers
-  routers = _.filter(routers, function (router) {
-    return (_.isFunction(router) && router.name === 'router');
+  routers = _.filter(routers, (router) => {
+    return _.isFunction(router) && router.name === 'router';
   });
   routers = _.compact(routers);
   routers = _.uniqBy(routers, 'uuid');
 
   // mount all current routers
   if (app && app.use) {
-
-    //setup version based routers
-    _.forEach(routers, router => {
-
+    // setup version based routers
+    _.forEach(routers, (router) => {
       // register versioned routers
       if (router.version) {
         const prefix = `/${router.version}`;
@@ -132,12 +115,6 @@ const mountInto = (app, ...wrouters) => {
       else {
         app.use(router);
       }
-
     });
   }
-
 };
-
-// exports
-exports.Router = Router;
-exports.mountInto = mountInto;

@@ -1,17 +1,9 @@
-'use strict';
-
-//ensure test environment
-process.env.NODE_ENV = 'test';
-
-
-//dependencies
-const _ = require('lodash');
-const express = require('express');
-const bodyParser = require('body-parser');
-const supertest = require('supertest');
-const { expect } = require('chai');
-const { Router, mountInto } = require('..');
-
+import _ from 'lodash';
+import express from 'express';
+import bodyParser from 'body-parser';
+import supertest from 'supertest';
+import { expect } from 'chai';
+import { Router, mountInto } from '../src';
 
 describe('Unit', () => {
   it('should export router factory', () => {
@@ -37,24 +29,21 @@ describe('Unit', () => {
     expect(router.name).to.equal('router');
   });
 
-  it('should instantiate router with provided version prefix',
-    () => {
-      const router = new Router({ prefix: 'v-' });
-      expect(router).to.exist;
-      expect(router.version).to.exist;
-      expect(router.version).to.be.equal('v-1');
-      expect(router.name).to.equal('router');
-    });
+  it('should instantiate router with provided version prefix', () => {
+    const router = new Router({ prefix: 'v-' });
+    expect(router).to.exist;
+    expect(router.version).to.exist;
+    expect(router.version).to.be.equal('v-1');
+    expect(router.name).to.equal('router');
+  });
 
-  it('should instantiate router with provided version prefix',
-    () => {
-      const router =
-        new Router({ prefix: 'v-', version: '0.1.0', minor: true });
-      expect(router).to.exist;
-      expect(router.version).to.exist;
-      expect(router.version).to.be.equal('v-0.1');
-      expect(router.name).to.equal('router');
-    });
+  it('should instantiate router with provided version prefix', () => {
+    const router = new Router({ prefix: 'v-', version: '0.1.0', minor: true });
+    expect(router).to.exist;
+    expect(router.version).to.exist;
+    expect(router.version).to.be.equal('v-0.1');
+    expect(router.name).to.equal('router');
+  });
 });
 
 describe('Mount', () => {
@@ -65,69 +54,73 @@ describe('Mount', () => {
   });
 
   it('should be able to mount router into app', () => {
-    //before
+    // before
     const app = express();
     expect(app._router).to.not.exist;
 
-    //initialize & mount
+    // initialize & mount
     const router = new Router();
-    router.get('/samples', (req, res) => { res.json(req.body); });
+    router.get('/samples', (req, res) => {
+      res.json(req.body);
+    });
     mountInto(app, router);
 
-    //after
+    // after
     expect(app._router).to.exist;
     expect(app._router.stack).to.exist;
-    const found =
-      _.find(app._router.stack, ['handle.uuid', router.uuid]);
+    const found = _.find(app._router.stack, ['handle.uuid', router.uuid]);
     expect(found).to.exist;
     expect(found.handle).to.eql(router);
   });
 
   it('should be able to mount router only once into app', () => {
-    //before
+    // before
     const app = express();
     expect(app._router).to.not.exist;
 
-    //initialize & mount
+    // initialize & mount
     const router = new Router();
-    router.get('/samples', (req, res) => { res.json(req.body); });
+    router.get('/samples', (req, res) => {
+      res.json(req.body);
+    });
     mountInto(app, router, router);
 
-    //after
+    // after
     expect(app._router).to.exist;
     expect(app._router.stack).to.exist;
-    const founds =
-      _.filter(app._router.stack, ['handle.uuid', router.uuid]);
+    const founds = _.filter(app._router.stack, ['handle.uuid', router.uuid]);
     expect(founds).to.exist;
     expect(founds).to.have.length(1);
     expect(_.first(founds).handle).to.eql(router);
   });
 
   it('should be able to mount routers into app', () => {
-    //before
+    // before
     const app = express();
     expect(app._router).to.not.exist;
 
-    //initialize & mount
+    // initialize & mount
     const routerA = new Router();
-    routerA.get('/a', (req, res) => { res.json(req.body); });
+    routerA.get('/a', (req, res) => {
+      res.json(req.body);
+    });
 
     const routerB = new Router();
-    routerB.get('/b', (req, res) => { res.json(req.body); });
+    routerB.get('/b', (req, res) => {
+      res.json(req.body);
+    });
 
     mountInto(app, routerA, routerB);
 
-    //after
+    // after
     expect(app._router).to.exist;
     expect(app._router.stack).to.exist;
 
-    const foundA =
-      _.find(app._router.stack, ['handle.uuid', routerA.uuid]);
+    const foundA = _.find(app._router.stack, ['handle.uuid', routerA.uuid]);
     expect(foundA).to.exist;
     expect(foundA.handle).to.eql(routerA);
 
-    const foundB =
-      _.find(app._router.stack, ['handle.uuid', routerB.uuid]);
+    const foundB = _.find(app._router.stack, ['handle.uuid', routerB.uuid]);
     expect(foundB).to.exist;
     expect(foundB.handle).to.eql(routerB);
   });
@@ -154,9 +147,9 @@ describe('Integration', () => {
     expect(router.mountInto).to.be.a('function');
   });
 
-  it('should be mounted into the app', done => {
+  it('should be mounted into the app', (done) => {
     const router = new Router();
-    router.post('/users', function (request, response) {
+    router.post('/users', (request, response) => {
       response.status(201).json(request.body);
     });
     router.mountInto(app);
@@ -175,9 +168,9 @@ describe('Integration', () => {
       });
   });
 
-  it('should be mounted into the app', done => {
+  it('should be mounted into the app', (done) => {
     const router = new Router({ version: 2 });
-    router.post('/users', function (request, response) {
+    router.post('/users', (request, response) => {
       response.status(201).json(request.body);
     });
     router.mountInto(app);
@@ -196,9 +189,9 @@ describe('Integration', () => {
       });
   });
 
-  it('should be mounted into the app', done => {
+  it('should be mounted into the app', (done) => {
     const router = new Router({ version: 3, prefix: 'v-' });
-    router.post('/users', function (request, response) {
+    router.post('/users', (request, response) => {
       response.status(201).json(request.body);
     });
     router.mountInto(app);

@@ -20,8 +20,8 @@ $ npm install --save @lykmapipo/express-router-extra
 ## Usage
 
 ```javascript
-const express = require('express')
-const { Router, mountInto } = require('@lykmapipo/express-router-extra');
+import express from 'express';
+import { Router, mountInto } from '@lykmapipo/express-router-extra';
 
 // instantiate a router
 const router = new Router({prefix: 'v', version: 1});
@@ -33,13 +33,13 @@ router.patch('/users/:id', ...); // PATCH /v1.0.0/users/:id
 router.delete('/users/:id', ...); // DELETE /v1.0.0/users/:id
 
 // mount router into app
-router.mountInto(app);
+mountInto(app);
 
 app.listen(3000);
 
 ```
 
-- [See Example](https://github.com/lykmapipo/express-router-extra/blob/master/examples/simple.js)
+- [See Example](https://github.com/lykmapipo/express-router-extra/blob/master/examples/index.js)
 
 Test mounted path(s)
 ```curl
@@ -67,7 +67,7 @@ It will be nice, if you open an issue first so that we can know what is going on
 ## Licence
 The MIT License (MIT)
 
-Copyright (c) 2018 lykmapipo & Contributors
+Copyright (c) lykmapipo & Contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
