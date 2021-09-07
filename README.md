@@ -1,6 +1,6 @@
 # express-router-extra
 
-[![Build Status](https://travis-ci.com/lykmapipo/express-router-extra.svg?branch=master)](https://travis-ci.com/lykmapipo/express-router-extra)
+[![Build Status](https://app.travis-ci.com/lykmapipo/express-router-extra.svg?branch=master)](https://app.travis-ci.com/lykmapipo/express-router-extra)
 [![Dependencies Status](https://david-dm.org/lykmapipo/express-router-extra.svg)](https://david-dm.org/lykmapipo/express-router-extra)
 [![Coverage Status](https://coveralls.io/repos/github/lykmapipo/express-router-extra/badge.svg?branch=master)](https://coveralls.io/github/lykmapipo/express-router-extra?branch=master)
 [![GitHub License](https://img.shields.io/github/license/lykmapipo/express-router-extra)](https://github.com/lykmapipo/express-router-extra/blob/master/LICENSE)
